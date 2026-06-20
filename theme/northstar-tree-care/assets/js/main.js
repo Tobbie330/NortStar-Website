@@ -34,6 +34,40 @@
     });
   }
 
+  // Gallery lightbox.
+  var lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    var lbImg = document.getElementById("lightbox-img");
+    var lbCap = document.getElementById("lightbox-cap");
+    var closeBtn = lightbox.querySelector(".lightbox-close");
+
+    function openLightbox(src, caption) {
+      lbImg.setAttribute("src", src);
+      lbImg.setAttribute("alt", caption || "");
+      lbCap.textContent = caption || "";
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+    }
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll(".gallery-link").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        openLightbox(link.getAttribute("href"), link.getAttribute("data-caption"));
+      });
+    });
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+  }
+
   // If the form was submitted, scroll to the result message.
   if (window.location.hash === "#contact" && window.location.search.indexOf("quote=") !== -1) {
     var contact = document.getElementById("contact");

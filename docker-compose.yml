@@ -37,9 +37,13 @@ services:
       WORDPRESS_DB_NAME: wordpress
       # Show PHP errors while developing locally.
       WORDPRESS_DEBUG: 1
+      # Local mail catcher (see mu-plugins/northstar-mailpit.php).
+      NS_SMTP_HOST: mailpit
+      NS_SMTP_PORT: 1025
     volumes:
       - wp_data:/var/www/html
       - ./theme/northstar-tree-care:/var/www/html/wp-content/themes/northstar-tree-care
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins
 
   # One-shot installer/configurer. Runs, sets everything up, then stops.
   wp-setup:
@@ -73,6 +77,15 @@ services:
       PMA_USER: wordpress
       PMA_PASSWORD: wordpress
       UPLOAD_LIMIT: 64M
+
+  # Local mail catcher — the contact form's emails show up here.
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: northstar-mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"   # web inbox  -> http://localhost:8025
+      - "1025:1025"   # SMTP (used internally by WordPress)
 
 volumes:
   db_data:

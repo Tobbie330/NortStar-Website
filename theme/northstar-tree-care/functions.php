@@ -108,16 +108,60 @@ function northstar_using_image_logo() {
  * ---------------------------------------------------------------------- */
 function northstar_services() {
 	return array(
-		array( 'icon' => 'axe',     'title' => 'Tree Removal',            'text' => 'Safe, efficient removal of hazardous, dead, or unwanted trees of any size — protecting your home and landscape.' ),
-		array( 'icon' => 'shears',  'title' => 'Tree Trimming & Pruning', 'text' => 'Expert pruning that promotes healthy growth, strong structure, and great curb appeal for your trees.' ),
-		array( 'icon' => 'stump',   'title' => 'Stump Grinding',          'text' => 'Complete stump removal to reclaim your yard and prevent regrowth, tripping hazards, and pests.' ),
-		array( 'icon' => 'storm',   'title' => 'Emergency Storm Cleanup', 'text' => 'Rapid storm response to clear fallen limbs and trees and secure your property when it matters most.' ),
-		array( 'icon' => 'brush',   'title' => 'Land & Brush Clearing',   'text' => 'Clearing overgrown brush and vegetation to create usable, safer, and more attractive land.' ),
-		array( 'icon' => 'lot',     'title' => 'Lot Preparation',         'text' => 'Site clearing and prep for new builds, fences, driveways, and landscaping projects.' ),
-		array( 'icon' => 'leaf',    'title' => 'Property Maintenance',    'text' => 'Year-round upkeep that keeps your landscape safe, clean, healthy, and well managed.' ),
-		array( 'icon' => 'hedge',   'title' => 'Shrub & Hedge Care',      'text' => 'Shaping, trimming and care that keep shrubs and hedges healthy, tidy, and beautiful.' ),
-		array( 'icon' => 'building','title' => 'Commercial & Residential','text' => 'Tailored tree care programs for homes, businesses, HOAs, and municipal properties.' ),
+		array( 'icon' => 'axe',     'title' => 'Tree Removal',            'text' => 'Safe, efficient removal of hazardous, dead, or unwanted trees of any size — protecting your home and landscape.',
+			'long' => 'When a tree becomes hazardous, diseased, or simply has to go, our crew removes it safely and cleanly. We handle everything from tight residential drops near homes and power lines to large rural takedowns, using proper rigging and equipment to protect everything around it.' ),
+		array( 'icon' => 'shears',  'title' => 'Tree Trimming & Pruning', 'text' => 'Expert pruning that promotes healthy growth, strong structure, and great curb appeal for your trees.',
+			'long' => 'Proper pruning keeps trees healthy, structurally sound, and looking their best. We remove dead or crossing limbs, raise canopies, thin crowns for light and airflow, and shape young trees so they grow strong for years to come.' ),
+		array( 'icon' => 'stump',   'title' => 'Stump Grinding',          'text' => 'Complete stump removal to reclaim your yard and prevent regrowth, tripping hazards, and pests.',
+			'long' => 'Leftover stumps are trip hazards and homes for pests. We grind stumps below grade so you can reclaim your yard, replant, or lay new landscaping — and we clean up the grindings when the job is done.' ),
+		array( 'icon' => 'storm',   'title' => 'Emergency Storm Cleanup', 'text' => 'Rapid storm response to clear fallen limbs and trees and secure your property when it matters most.',
+			'long' => "Storms don't keep business hours, and neither do we. When wind or ice brings limbs or whole trees down, our team responds quickly to clear hazards, free blocked access, and make your property safe again." ),
+		array( 'icon' => 'brush',   'title' => 'Land & Brush Clearing',   'text' => 'Clearing overgrown brush and vegetation to create usable, safer, and more attractive land.',
+			'long' => 'Overgrown brush, saplings, and undergrowth turn usable land into a liability. We clear lots, fence lines, trails, and acreage to open up your property and reduce fire and pest risk.' ),
+		array( 'icon' => 'lot',     'title' => 'Lot Preparation',         'text' => 'Site clearing and prep for new builds, fences, driveways, and landscaping projects.',
+			'long' => 'Building, fencing, or landscaping? We clear and prep sites so your project starts on solid ground — removing trees, brush, and debris and leaving a clean, workable lot.' ),
+		array( 'icon' => 'leaf',    'title' => 'Property Maintenance',    'text' => 'Year-round upkeep that keeps your landscape safe, clean, healthy, and well managed.',
+			'long' => 'Keep your landscape safe and sharp all year. From seasonal cleanups to ongoing tree and vegetation management, we offer dependable maintenance for homes, businesses, and rural properties.' ),
+		array( 'icon' => 'hedge',   'title' => 'Shrub & Hedge Care',      'text' => 'Shaping, trimming and care that keep shrubs and hedges healthy, tidy, and beautiful.',
+			'long' => 'Healthy, well-shaped shrubs and hedges frame your property beautifully. We trim, shape, and maintain them to keep your landscaping tidy, dense, and thriving.' ),
+		array( 'icon' => 'building','title' => 'Commercial & Residential','text' => 'Tailored tree care programs for homes, businesses, HOAs, and municipal properties.',
+			'long' => 'From single-family homes to HOAs, businesses, and municipal grounds, we tailor tree care programs to your property, budget, and schedule — with the same safety and quality on every job.' ),
 	);
+}
+
+/* -------------------------------------------------------------------------
+ * Gallery images. Drop real photos (.jpg/.png/.webp) into
+ * assets/img/gallery/ and they are used automatically; otherwise the
+ * bundled themed placeholders are shown.
+ * ---------------------------------------------------------------------- */
+function northstar_gallery() {
+	$dir = get_template_directory() . '/assets/img/gallery/';
+	$uri = get_template_directory_uri() . '/assets/img/gallery/';
+
+	$photos = array();
+	foreach ( glob( $dir . '*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', GLOB_BRACE ) as $file ) {
+		$name    = basename( $file );
+		$caption = ucwords( str_replace( array( '-', '_' ), ' ', pathinfo( $name, PATHINFO_FILENAME ) ) );
+		$photos[] = array( 'img' => $uri . $name, 'caption' => $caption );
+	}
+	if ( $photos ) {
+		return $photos;
+	}
+
+	// Bundled placeholders (replace any time with real job photos).
+	$ph = array(
+		'tree-removal'   => 'Tree Removal',
+		'trimming'       => 'Trimming & Pruning',
+		'stump-grinding' => 'Stump Grinding',
+		'storm-cleanup'  => 'Storm Cleanup',
+		'land-clearing'  => 'Land & Brush Clearing',
+		'lot-prep'       => 'Lot Preparation',
+	);
+	$out = array();
+	foreach ( $ph as $slug => $caption ) {
+		$out[] = array( 'img' => $uri . $slug . '.svg', 'caption' => $caption );
+	}
+	return $out;
 }
 
 /* -------------------------------------------------------------------------

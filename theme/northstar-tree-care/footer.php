@@ -25,13 +25,13 @@ $home       = home_url( '/' );
 			</div>
 
 			<div class="footer-col">
-				<h4>Services</h4>
+				<h4>Explore</h4>
 				<ul>
-					<li><a href="<?php echo esc_url( $home . '#services' ); ?>">Tree Removal</a></li>
-					<li><a href="<?php echo esc_url( $home . '#services' ); ?>">Trimming &amp; Pruning</a></li>
-					<li><a href="<?php echo esc_url( $home . '#services' ); ?>">Stump Grinding</a></li>
-					<li><a href="<?php echo esc_url( $home . '#services' ); ?>">Storm Cleanup</a></li>
-					<li><a href="<?php echo esc_url( $home . '#services' ); ?>">Land Clearing</a></li>
+					<li><a href="<?php echo esc_url( $home ); ?>">Home</a></li>
+					<li><a href="<?php echo esc_url( $home . 'services/' ); ?>">Services</a></li>
+					<li><a href="<?php echo esc_url( $home . 'gallery/' ); ?>">Gallery</a></li>
+					<li><a href="<?php echo esc_url( $home . 'about/' ); ?>">About Us</a></li>
+					<li><a href="<?php echo esc_url( $home . 'contact/' ); ?>">Contact</a></li>
 				</ul>
 			</div>
 

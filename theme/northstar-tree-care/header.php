@@ -38,14 +38,13 @@ $phone_link = northstar_opt( 'phone_link', '+15551234567' );
 					'depth'          => 1,
 				) );
 			} else {
-				// Default anchor menu for the one-page layout.
-				$home = home_url( '/' );
+				// Default menu (used until a custom menu is assigned in WP admin).
 				echo '<ul>';
-				echo '<li><a href="' . esc_url( $home . '#services' ) . '">Services</a></li>';
-				echo '<li><a href="' . esc_url( $home . '#about' ) . '">About</a></li>';
-				echo '<li><a href="' . esc_url( $home . '#why' ) . '">Why Us</a></li>';
-				echo '<li><a href="' . esc_url( $home . '#process' ) . '">Process</a></li>';
-				echo '<li><a href="' . esc_url( $home . '#contact' ) . '">Contact</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/services/' ) ) . '">Services</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/gallery/' ) ) . '">Gallery</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">About</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/contact/' ) ) . '">Contact</a></li>';
 				echo '</ul>';
 			}
 			?>
@@ -53,7 +52,7 @@ $phone_link = northstar_opt( 'phone_link', '+15551234567' );
 
 		<div class="header-cta">
 			<a class="header-phone" href="tel:<?php echo esc_attr( $phone_link ); ?>"><?php echo esc_html( $phone ); ?></a>
-			<a class="btn btn--primary" href="<?php echo esc_url( home_url( '/#contact' ) ); ?>">Free Quote</a>
+			<a class="btn btn--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Free Quote</a>
 			<button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
 				<span></span><span></span><span></span>
 			</button>
