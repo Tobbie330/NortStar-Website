@@ -2,9 +2,9 @@
 /**
  * Footer
  */
-$phone      = northstar_opt( 'phone', '(555) 123-4567' );
-$phone_link = northstar_opt( 'phone_link', '+15551234567' );
-$email      = northstar_opt( 'email', 'info@northstartreecare.com' );
+$phone      = northstar_opt( 'phone', '(989) 318-4490' );
+$phone_link = northstar_opt( 'phone_link', '+19893184490' );
+$email      = northstar_opt( 'email', 'Support@north-star-pros.com' );
 $address    = northstar_opt( 'address', 'Serving residential, commercial & municipal properties' );
 $facebook   = northstar_opt( 'facebook' );
 $instagram  = northstar_opt( 'instagram' );

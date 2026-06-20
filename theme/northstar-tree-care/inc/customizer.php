@@ -18,9 +18,9 @@ function northstar_customize_register( $wp_customize ) {
 	) );
 
 	$fields = array(
-		'phone'        => array( 'label' => 'Phone number',            'default' => '(555) 123-4567',                          'type' => 'text' ),
-		'phone_link'   => array( 'label' => 'Phone (dial format)',     'default' => '+15551234567',                            'type' => 'text' ),
-		'email'        => array( 'label' => 'Email address',           'default' => 'info@northstartreecare.com',              'type' => 'text' ),
+		'phone'        => array( 'label' => 'Phone number',            'default' => '(989) 318-4490',                          'type' => 'text' ),
+		'phone_link'   => array( 'label' => 'Phone (dial format)',     'default' => '+19893184490',                            'type' => 'text' ),
+		'email'        => array( 'label' => 'Email address',           'default' => 'Support@north-star-pros.com',              'type' => 'text' ),
 		'address'      => array( 'label' => 'Service area / address',  'default' => 'Serving residential, commercial & municipal properties', 'type' => 'text' ),
 		'hours'        => array( 'label' => 'Hours / availability',    'default' => 'Mon–Sat 7am–6pm · 24/7 Storm Emergencies', 'type' => 'text' ),
 		'map_query'    => array( 'label' => 'Map location (town, state or address)', 'default' => 'United States', 'type' => 'text' ),

@@ -4,9 +4,9 @@
  */
 get_header();
 
-$phone        = northstar_opt( 'phone', '(555) 123-4567' );
-$phone_link   = northstar_opt( 'phone_link', '+15551234567' );
-$email        = northstar_opt( 'email', 'info@northstartreecare.com' );
+$phone        = northstar_opt( 'phone', '(989) 318-4490' );
+$phone_link   = northstar_opt( 'phone_link', '+19893184490' );
+$email        = northstar_opt( 'email', 'Support@north-star-pros.com' );
 $address      = northstar_opt( 'address', 'Serving residential, commercial & municipal properties' );
 $hours        = northstar_opt( 'hours', 'Mon–Sat 7am–6pm · 24/7 Storm Emergencies' );
 $hero_tagline = northstar_opt( 'hero_tagline', 'Rooted in Quality. Guided by the North Star.' );

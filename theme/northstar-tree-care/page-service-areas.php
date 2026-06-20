@@ -7,7 +7,7 @@
 get_header();
 
 $address = northstar_opt( 'address', 'Serving residential, commercial & municipal properties' );
-$phone   = northstar_opt( 'phone', '(555) 123-4567' );
+$phone   = northstar_opt( 'phone', '(989) 318-4490' );
 
 while ( have_posts() ) : the_post();
 ?>
@@ -55,7 +55,7 @@ while ( have_posts() ) : the_post();
 	<div class="container" style="max-width:720px;">
 		<span class="eyebrow">Fast Response</span>
 		<h2>Need Tree Work in Your Neighborhood?</h2>
-		<p style="color:rgba(244,241,232,.8);">Call <a href="tel:<?php echo esc_attr( northstar_opt( 'phone_link', '+15551234567' ) ); ?>" style="color:var(--ns-olive-bright);"><?php echo esc_html( $phone ); ?></a> or request a free estimate online.</p>
+		<p style="color:rgba(244,241,232,.8);">Call <a href="tel:<?php echo esc_attr( northstar_opt( 'phone_link', '+19893184490' ) ); ?>" style="color:var(--ns-olive-bright);"><?php echo esc_html( $phone ); ?></a> or request a free estimate online.</p>
 		<a class="btn btn--primary btn--lg" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Get a Free Quote</a>
 	</div>
 </section>

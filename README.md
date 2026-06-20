@@ -205,13 +205,44 @@ the Leads/Mailpit setup above is independent of which form you use.
 
 ---
 
-## Going live later
+## Deploying to Hostinger (or any WordPress host)
 
-This same theme can be uploaded to any WordPress host (e.g. your own server,
-Bluehost, SiteGround, WP Engine). Zip the `theme/northstar-tree-care` folder and
-install it under `Appearance → Themes → Add New → Upload Theme`. Your content and
-Customizer settings can be recreated there, or migrated with a plugin like
-**All-in-One WP Migration**.
+**Important:** this is a WordPress *theme*, not a standalone website. Do **not**
+upload the project files into `public_html` with a file manager / FTP — there is no
+`index.html` at the project root, so the server returns **403 Forbidden**. WordPress
+must be installed first, and the theme is added *inside* WordPress.
+
+### Steps for Hostinger
+
+1. In **hPanel → Websites**, install WordPress on your domain
+   (**Add Website → WordPress**, or **Auto Installer → WordPress**). Hostinger
+   often pre-installs it on new plans.
+2. Log in to your site's dashboard at `https://your-domain.com/wp-admin`.
+3. Go to **Appearance → Themes → Add New → Upload Theme**.
+4. Upload **`northstar-tree-care.zip`** (included in this repo) and click
+   **Activate**.
+5. That's it — on activation the theme **auto-creates the pages, sets the home
+   page, and builds the navigation menu** for you.
+6. Set your details under **Appearance → Customize → North Star Settings**
+   (phone, email, map location, service areas, social links).
+7. If inner pages show "Not Found", go to **Settings → Permalinks** and click
+   **Save** once to refresh the URLs.
+
+> The `northstar-tree-care.zip` is built from the `theme/northstar-tree-care`
+> folder. To rebuild it after edits:
+> `cd theme && zip -r ../northstar-tree-care.zip northstar-tree-care`
+
+### Sending real email in production
+
+The local Mailpit catcher (`mu-plugins/`) is **not** part of the theme zip, so it
+won't go to Hostinger. To receive contact-form emails on the live site, install the
+free **WP Mail SMTP** plugin and connect it to your email (or Hostinger's SMTP), then
+confirm the "send to" address in **Customize → North Star Settings → Email**.
+
+### Other hosts
+
+The same zip works on any WordPress host (Bluehost, SiteGround, WP Engine, your own
+server) — install WordPress, then **Appearance → Themes → Add New → Upload Theme**.
 
 ---
 

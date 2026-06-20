@@ -323,7 +323,7 @@ function northstar_handle_quote() {
 	) );
 
 	// Try to email the business owner (works once SMTP is configured).
-	$to = northstar_opt( 'email', get_option( 'admin_email' ) );
+	$to = northstar_opt( 'email', 'Support@north-star-pros.com' );
 	wp_mail(
 		$to,
 		'New quote request — ' . $name,
@@ -336,6 +336,86 @@ function northstar_handle_quote() {
 }
 add_action( 'admin_post_nopriv_ns_quote', 'northstar_handle_quote' );
 add_action( 'admin_post_ns_quote', 'northstar_handle_quote' );
+
+/* -------------------------------------------------------------------------
+ * First-run bootstrap. When the theme is activated (e.g. after uploading it
+ * to Hostinger or any WordPress host), this creates the site pages, sets the
+ * static front page, and builds + assigns the navigation menu — so the site
+ * is ready without needing the Docker setup script. Runs once.
+ * ---------------------------------------------------------------------- */
+function northstar_bootstrap_content() {
+	if ( get_option( 'northstar_setup_done' ) ) {
+		return;
+	}
+
+	$pages = array(
+		'home'          => 'Home',
+		'services'      => 'Services',
+		'gallery'       => 'Gallery',
+		'service-areas' => 'Service Areas',
+		'about'         => 'About',
+		'contact'       => 'Contact',
+	);
+
+	$ids = array();
+	foreach ( $pages as $slug => $title ) {
+		$existing = get_page_by_path( $slug );
+		if ( $existing ) {
+			$ids[ $slug ] = (int) $existing->ID;
+			continue;
+		}
+		$ids[ $slug ] = (int) wp_insert_post( array(
+			'post_type'    => 'page',
+			'post_status'  => 'publish',
+			'post_title'   => $title,
+			'post_name'    => $slug,
+			'post_content' => '',
+		) );
+	}
+
+	// Use the designed Home page as the static front page.
+	if ( ! empty( $ids['home'] ) ) {
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $ids['home'] );
+	}
+
+	// Build and assign the primary navigation menu (once).
+	if ( ! wp_get_nav_menu_object( 'Main Menu' ) ) {
+		$menu_id = wp_create_nav_menu( 'Main Menu' );
+		if ( ! is_wp_error( $menu_id ) ) {
+			$labels = array(
+				'home' => 'Home', 'services' => 'Services', 'gallery' => 'Gallery',
+				'service-areas' => 'Areas', 'about' => 'About', 'contact' => 'Contact',
+			);
+			foreach ( $labels as $slug => $label ) {
+				if ( empty( $ids[ $slug ] ) ) {
+					continue;
+				}
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'     => $label,
+					'menu-item-object'    => 'page',
+					'menu-item-object-id' => $ids[ $slug ],
+					'menu-item-type'      => 'post_type',
+					'menu-item-status'    => 'publish',
+				) );
+			}
+			$locations            = get_theme_mod( 'nav_menu_locations', array() );
+			$locations['primary'] = $menu_id;
+			set_theme_mod( 'nav_menu_locations', $locations );
+		}
+	}
+
+	// Pretty permalinks so /services/ etc. resolve (only if still "Plain").
+	if ( '' === get_option( 'permalink_structure' ) ) {
+		update_option( 'permalink_structure', '/%postname%/' );
+		if ( function_exists( 'flush_rewrite_rules' ) ) {
+			flush_rewrite_rules( false );
+		}
+	}
+
+	update_option( 'northstar_setup_done', 1 );
+}
+add_action( 'after_switch_theme', 'northstar_bootstrap_content' );
 
 /* -------------------------------------------------------------------------
  * Customizer settings

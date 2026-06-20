@@ -2,8 +2,8 @@
 /**
  * Header + fixed navigation
  */
-$phone      = northstar_opt( 'phone', '(555) 123-4567' );
-$phone_link = northstar_opt( 'phone_link', '+15551234567' );
+$phone      = northstar_opt( 'phone', '(989) 318-4490' );
+$phone_link = northstar_opt( 'phone_link', '+19893184490' );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
