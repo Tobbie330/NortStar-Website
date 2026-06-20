@@ -1,0 +1,79 @@
+# North Star Tree Care — local WordPress stack
+#
+#   Start it:   docker compose up -d
+#   View site:  http://localhost:8080
+#   WP admin:   http://localhost:8080/wp-admin   (user: admin / pass: admin123)
+#   Database:   http://localhost:8081            (phpMyAdmin)
+#
+# The "wp-setup" service installs and configures WordPress automatically the
+# first time you run it, then exits. Your theme lives in ./theme and is mounted
+# live, so any edits you make show up on refresh.
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: northstar-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.5-php8.2-apache
+    container_name: northstar-wp
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      # Show PHP errors while developing locally.
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_data:/var/www/html
+      - ./theme/northstar-tree-care:/var/www/html/wp-content/themes/northstar-tree-care
+
+  # One-shot installer/configurer. Runs, sets everything up, then stops.
+  wp-setup:
+    image: wordpress:cli-php8.2
+    container_name: northstar-setup
+    depends_on:
+      - db
+      - wordpress
+    environment:
+      SITE_URL: http://localhost:8080
+      WP_ADMIN_USER: admin
+      WP_ADMIN_PASSWORD: admin123
+      WP_ADMIN_EMAIL: info@northstartreecare.com
+    volumes:
+      - wp_data:/var/www/html
+      - ./theme/northstar-tree-care:/var/www/html/wp-content/themes/northstar-tree-care
+      - ./setup:/setup:ro
+    entrypoint: ["sh", "/setup/wp-setup.sh"]
+    restart: "no"
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: northstar-pma
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress
+      UPLOAD_LIMIT: 64M
+
+volumes:
+  db_data:
+  wp_data:

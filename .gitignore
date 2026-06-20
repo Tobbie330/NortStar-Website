@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Docker volumes are managed by Docker, not committed
+# (nothing to ignore here, but keep this file as a placeholder for local notes)
+
+# Local WordPress uploads if ever bind-mounted
+wp-content/uploads/
