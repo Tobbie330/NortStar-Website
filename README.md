@@ -10,6 +10,29 @@ WordPress dashboard.
 
 ---
 
+## 📦 Two websites in this repo
+
+This project now contains **two** sibling WordPress sites:
+
+| Site | Theme folder | Run locally | Local URL | Upload zip |
+| ---- | ------------ | ----------- | --------- | ---------- |
+| **North Star Tree Care** | `theme/northstar-tree-care` | `docker compose up -d` | http://localhost:8080 | `northstar-tree-care.zip` |
+| **North Star Landscaping** | `theme/northstar-landscaping` | `docker compose -f docker-compose.landscaping.yml up -d` | http://localhost:8090 | `northstar-landscaping.zip` |
+
+They use **different ports and data**, so you can run both at once. The Landscaping
+site uses the same features (multi-page, gallery, working contact form + Mailpit,
+self-installing theme) with a fresh green palette and landscaping content. Its
+preview lives in [`preview/landscaping/`](preview/landscaping/) — open
+[`preview/landscaping/standalone-homepage.html`](preview/landscaping/standalone-homepage.html)
+for an instant look.
+
+> Everything documented below for the Tree Care site applies to the Landscaping
+> site too — just swap the URLs/ports above and use
+> `docker compose -f docker-compose.landscaping.yml ...` for Docker commands.
+> For Hostinger, upload **`northstar-landscaping.zip`** instead.
+
+---
+
 ## What you get
 
 - A custom WordPress theme (`North Star Tree Care`) styled to match your logo

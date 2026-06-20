@@ -1,0 +1,58 @@
+<?php
+/**
+ * Footer
+ */
+$phone      = northstar_opt( 'phone', '(989) 318-4491' );
+$phone_link = northstar_opt( 'phone_link', '+19893184491' );
+$email      = northstar_opt( 'email', 'Support@north-star-pros.com' );
+$address    = northstar_opt( 'address', 'Serving residential & commercial properties' );
+$facebook   = northstar_opt( 'facebook' );
+$instagram  = northstar_opt( 'instagram' );
+$home       = home_url( '/' );
+?>
+<footer class="site-footer">
+	<div class="container">
+		<div class="footer-top">
+			<div class="footer-brand">
+				<?php northstar_logo( 'brand-mark' ); ?>
+				<p><?php esc_html_e( 'Professional landscape design, lawn care, hardscaping, planting and seasonal maintenance. Keeping residential and commercial properties healthy, green and beautiful year-round.', 'northstar' ); ?></p>
+				<?php if ( $facebook || $instagram ) : ?>
+					<div class="footer-social">
+						<?php if ( $facebook ) : ?><a href="<?php echo esc_url( $facebook ); ?>" aria-label="Facebook" target="_blank" rel="noopener"><?php echo northstar_icon( 'facebook' ); ?></a><?php endif; ?>
+						<?php if ( $instagram ) : ?><a href="<?php echo esc_url( $instagram ); ?>" aria-label="Instagram" target="_blank" rel="noopener"><?php echo northstar_icon( 'instagram' ); ?></a><?php endif; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+
+			<div class="footer-col">
+				<h4>Explore</h4>
+				<ul>
+					<li><a href="<?php echo esc_url( $home ); ?>">Home</a></li>
+					<li><a href="<?php echo esc_url( $home . 'services/' ); ?>">Services</a></li>
+					<li><a href="<?php echo esc_url( $home . 'gallery/' ); ?>">Gallery</a></li>
+					<li><a href="<?php echo esc_url( $home . 'service-areas/' ); ?>">Service Areas</a></li>
+					<li><a href="<?php echo esc_url( $home . 'about/' ); ?>">About Us</a></li>
+					<li><a href="<?php echo esc_url( $home . 'contact/' ); ?>">Contact</a></li>
+				</ul>
+			</div>
+
+			<div class="footer-col">
+				<h4>Contact</h4>
+				<ul>
+					<li><a href="tel:<?php echo esc_attr( $phone_link ); ?>"><?php echo esc_html( $phone ); ?></a></li>
+					<li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li>
+					<li><?php echo esc_html( $address ); ?></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<span>&copy; <?php echo esc_html( date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.</span>
+			<span><?php esc_html_e( 'Where Quality Takes Root.', 'northstar' ); ?></span>
+		</div>
+	</div>
+</footer>
+
+<?php wp_footer(); ?>
+</body>
+</html>

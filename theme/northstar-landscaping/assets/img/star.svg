@@ -1,0 +1,15 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="North Star compass">
+  <defs>
+    <linearGradient id="nsStarMain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#cfd2c6"/>
+    </linearGradient>
+  </defs>
+  <!-- diagonal compass rays -->
+  <path d="M150 50 L100 84 L50 50 L84 100 L50 150 L100 116 L150 150 L116 100 Z"
+        fill="#4f9a40" opacity="0.85"/>
+  <!-- primary north-star -->
+  <path d="M100 6 L113 87 L194 100 L113 113 L100 194 L87 113 L6 100 L87 87 Z"
+        fill="url(#nsStarMain)"/>
+  <circle cx="100" cy="100" r="6" fill="#2f6e2a"/>
+</svg>

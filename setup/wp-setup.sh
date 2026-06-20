@@ -1,9 +1,18 @@
 #!/bin/sh
-# Auto-installs and configures WordPress for North Star Tree Care.
+# Auto-installs and configures WordPress for a North Star site.
 # Safe to run multiple times — it only installs once, then just re-applies
 # the theme and settings.
+#
+# Configurable via environment variables (defaults = the Tree Care site):
+#   SITE_TITLE    e.g. "North Star Landscaping"
+#   THEME_SLUG    e.g. "northstar-landscaping"
+#   SITE_TAGLINE  e.g. "Where Quality Takes Root."
 
 set -e
+
+SITE_TITLE="${SITE_TITLE:-North Star Tree Care}"
+THEME_SLUG="${THEME_SLUG:-northstar-tree-care}"
+SITE_TAGLINE="${SITE_TAGLINE:-Rooted in Quality. Guided by the North Star.}"
 
 echo "→ Waiting for WordPress core files..."
 until [ -f /var/www/html/wp-load.php ]; do
@@ -17,10 +26,10 @@ until wp core is-installed 2>/dev/null; do
 
   if wp core install \
       --url="${SITE_URL:-http://localhost:8080}" \
-      --title="North Star Tree Care" \
+      --title="${SITE_TITLE}" \
       --admin_user="${WP_ADMIN_USER:-admin}" \
       --admin_password="${WP_ADMIN_PASSWORD:-admin123}" \
-      --admin_email="${WP_ADMIN_EMAIL:-info@northstartreecare.com}" \
+      --admin_email="${WP_ADMIN_EMAIL:-Support@north-star-pros.com}" \
       --skip-email 2>/dev/null; then
     break
   fi
@@ -35,11 +44,11 @@ until wp core is-installed 2>/dev/null; do
 done
 
 echo "→ Applying North Star branding & settings..."
-wp option update blogname "North Star Tree Care"
-wp option update blogdescription "Rooted in Quality. Guided by the North Star."
+wp option update blogname "${SITE_TITLE}"
+wp option update blogdescription "${SITE_TAGLINE}"
 wp option update timezone_string "America/New_York" || true
 wp rewrite structure '/%postname%/' --hard
-wp theme activate northstar-tree-care
+wp theme activate "${THEME_SLUG}"
 
 # --- Create the site pages (idempotent) ----------------------------------
 ensure_page() {
@@ -83,8 +92,8 @@ wp menu location assign main-menu primary >/dev/null 2>&1 || true
 wp rewrite flush --hard
 
 echo ""
-echo "✅ North Star Tree Care is ready!"
+echo "✅ ${SITE_TITLE} is ready!"
 echo "   Website : ${SITE_URL:-http://localhost:8080}"
 echo "   Admin   : ${SITE_URL:-http://localhost:8080}/wp-admin  (user: ${WP_ADMIN_USER:-admin} / pass: ${WP_ADMIN_PASSWORD:-admin123})"
-echo "   Mail    : http://localhost:8025  (emails the contact form sends appear here)"
+echo "   Mail    : ${MAIL_URL:-http://localhost:8025}  (emails the contact form sends appear here)"
 echo ""

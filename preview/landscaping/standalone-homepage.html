@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"><title>North Star Landscaping — Beautiful Landscapes Year-Round</title><style>
+/*
+Theme Name: North Star Landscaping
+Theme URI: https://north-star-pros.com
+Author: North Star Landscaping
+Description: A clean, professional one-page theme for North Star Landscaping. Built around a fresh green, black and silver identity. Edit business details under Appearance > Customize > North Star Settings.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: northstar
+Tags: business, landscaping, lawn-care, one-page, custom-logo, responsive
+*/
+
+/* ============================================================
+   Design tokens (North Star Landscaping — fresh green palette)
+   ============================================================ */
+:root {
+  --ns-black:        #0e120d;
+  --ns-black-2:      #131a10;
+  --ns-dark:         #18210f;
+  --ns-olive:        #3e7d34;
+  --ns-olive-mid:    #4f9a40;
+  --ns-olive-light:  #74b85e;
+  --ns-olive-bright: #8fd16f;
+  --ns-cream:        #f3f4ec;
+  --ns-parchment:    #e6ead9;
+  --ns-silver:       #d9d9d2;
+  --ns-text:         #25291f;
+  --ns-muted:        #67705c;
+  --ns-line:         rgba(116, 184, 94, 0.28);
+  --ns-shadow:       0 18px 45px rgba(0, 0, 0, 0.18);
+
+  --ns-font-head: "Oswald", "Arial Narrow", Impact, sans-serif;
+  --ns-font-body: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --ns-max: 1180px;
+  --ns-radius: 14px;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  margin: 0;
+  font-family: var(--ns-font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ns-text);
+  background: var(--ns-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--ns-olive); text-decoration: none; transition: color .2s ease; }
+a:hover { color: var(--ns-olive-mid); }
+
+h1, h2, h3, h4 {
+  font-family: var(--ns-font-head);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: .5px;
+  color: var(--ns-text);
+  margin: 0 0 .5em;
+  text-transform: uppercase;
+}
+
+p { margin: 0 0 1.1em; }
+
+.container {
+  width: 100%;
+  max-width: var(--ns-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section { padding: 92px 0; }
+.section--dark { background: var(--ns-black); color: var(--ns-parchment); }
+.section--dark h2,
+.section--dark h3 { color: var(--ns-cream); }
+.section--tint { background: var(--ns-parchment); }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 14px;
+  color: var(--ns-olive-mid);
+  margin-bottom: 14px;
+}
+.section--dark .eyebrow { color: var(--ns-olive-bright); }
+
+.section-head { max-width: 720px; margin: 0 auto 56px; text-align: center; }
+.section-head h2 { font-size: clamp(2rem, 4vw, 3rem); }
+.section-head p { color: var(--ns-muted); font-size: 1.08rem; }
+.section--dark .section-head p { color: rgba(244, 241, 232, 0.75); }
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary { background: var(--ns-olive); color: #fff; }
+.btn--primary:hover { background: var(--ns-olive-mid); color: #fff; }
+.btn--ghost { background: transparent; color: var(--ns-cream); border-color: rgba(244, 241, 232, .5); }
+.btn--ghost:hover { background: rgba(244, 241, 232, .12); color: #fff; border-color: var(--ns-cream); }
+.btn--light { background: var(--ns-cream); color: var(--ns-black); }
+.btn--light:hover { background: #fff; color: var(--ns-black); }
+.btn--lg { padding: 16px 34px; font-size: 16px; }
+
+/* ============================================================
+   Header / navigation
+   ============================================================ */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  background: rgba(14, 16, 13, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(116,184,94, 0.22);
+  transition: background .3s ease, padding .3s ease;
+}
+.site-header.is-solid { background: rgba(14, 16, 13, 0.98); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px 24px;
+  max-width: var(--ns-max);
+  margin: 0 auto;
+}
+
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand img,
+.brand svg { height: 54px; width: auto; }
+.brand .brand-mark { height: 54px; width: 54px; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand-text strong {
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ns-cream);
+  font-size: 1.18rem;
+}
+.brand-text span {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ns-olive-bright);
+}
+
+.primary-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.primary-nav a {
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: var(--ns-parchment);
+}
+.primary-nav a:hover { color: var(--ns-olive-bright); }
+
+.header-cta { display: flex; align-items: center; gap: 14px; }
+.header-phone {
+  font-family: var(--ns-font-head);
+  letter-spacing: 1px;
+  color: var(--ns-cream);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+.header-phone:hover { color: var(--ns-olive-bright); }
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--ns-cream);
+  margin: 5px 0;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  color: var(--ns-cream);
+  background:
+    radial-gradient(circle at 70% 20%, rgba(79,154,64, 0.28), transparent 55%),
+    linear-gradient(180deg, rgba(14,16,13,0.78) 0%, rgba(14,16,13,0.88) 100%),
+    
+    var(--ns-black);
+  padding: 140px 0 100px;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 70%, var(--ns-black) 100%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; max-width: 760px; }
+.hero .hero-star { width: 88px; margin-bottom: 28px; filter: drop-shadow(0 0 18px rgba(255,255,255,.25)); }
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  color: #fff;
+  margin-bottom: .35em;
+  text-shadow: 0 4px 24px rgba(0,0,0,.4);
+}
+.hero h1 .accent { color: var(--ns-olive-bright); display: block; }
+.hero-tagline {
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.25rem;
+  color: var(--ns-olive-bright);
+  margin-bottom: 18px;
+}
+.hero-lead { font-size: 1.2rem; max-width: 600px; color: rgba(244,241,232,.9); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 42px;
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: rgba(244,241,232,.8);
+}
+.hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
+.hero-trust svg { width: 18px; height: 18px; fill: var(--ns-olive-bright); }
+
+/* ============================================================
+   Intro / about
+   ============================================================ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+.about-copy h2 { font-size: clamp(2rem, 3.6vw, 2.8rem); }
+.about-copy .lead { font-size: 1.18rem; color: var(--ns-text); }
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.stat {
+  background: var(--ns-black);
+  color: var(--ns-cream);
+  border-radius: var(--ns-radius);
+  padding: 28px 24px;
+  border: 1px solid rgba(116,184,94,.25);
+}
+.stat strong {
+  display: block;
+  font-family: var(--ns-font-head);
+  font-size: 2.4rem;
+  color: var(--ns-olive-bright);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat span { font-size: 14px; letter-spacing: .5px; color: rgba(244,241,232,.8); }
+
+/* ============================================================
+   Services
+   ============================================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+.service-card {
+  background: var(--ns-cream);
+  border: 1px solid var(--ns-line);
+  border-radius: var(--ns-radius);
+  padding: 34px 30px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ns-shadow);
+  border-color: var(--ns-olive-light);
+}
+.service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(79,154,64,.12);
+  margin-bottom: 20px;
+}
+.service-icon svg { width: 30px; height: 30px; fill: var(--ns-olive); }
+.service-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.service-card p { color: var(--ns-muted); margin: 0; font-size: 1rem; }
+
+/* ============================================================
+   Why choose us
+   ============================================================ */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.feature {
+  display: flex;
+  gap: 16px;
+  padding: 26px;
+  border-radius: var(--ns-radius);
+  background: rgba(244,241,232,.05);
+  border: 1px solid rgba(116,184,94,.2);
+}
+.feature-icon {
+  flex: 0 0 auto;
+  width: 46px; height: 46px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(143,209,111,.16);
+}
+.feature-icon svg { width: 24px; height: 24px; fill: var(--ns-olive-bright); }
+.feature h3 { font-size: 1.12rem; margin-bottom: 4px; color: var(--ns-cream); }
+.feature p { margin: 0; font-size: .96rem; color: rgba(244,241,232,.72); }
+
+/* ============================================================
+   Mission band
+   ============================================================ */
+.mission {
+  text-align: center;
+  background:
+    linear-gradient(rgba(14,16,13,.82), rgba(14,16,13,.82)),
+    radial-gradient(circle at 50% 0%, rgba(79,154,64,.4), transparent 60%),
+    var(--ns-black);
+  color: var(--ns-cream);
+}
+.mission .container { max-width: 860px; }
+.mission .star-divider { width: 46px; margin: 0 auto 24px; }
+.mission blockquote {
+  font-family: var(--ns-font-head);
+  font-weight: 500;
+  text-transform: none;
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+  line-height: 1.35;
+  letter-spacing: .5px;
+  margin: 0 0 18px;
+  color: #fff;
+}
+.mission cite {
+  font-style: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--ns-olive-bright);
+}
+
+/* ============================================================
+   Eco / process steps
+   ============================================================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  counter-reset: step;
+}
+.step { position: relative; padding-top: 18px; }
+.step::before {
+  counter-increment: step;
+  content: "0" counter(step);
+  font-family: var(--ns-font-head);
+  font-size: 2.6rem;
+  color: var(--ns-olive-light);
+  opacity: .45;
+  display: block;
+  margin-bottom: 8px;
+}
+.step h3 { font-size: 1.18rem; margin-bottom: 8px; }
+.step p { color: var(--ns-muted); font-size: 1rem; margin: 0; }
+
+/* ============================================================
+   Contact
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 50px;
+  align-items: start;
+}
+.contact-info h2 { font-size: clamp(2rem, 3.6vw, 2.7rem); color: var(--ns-cream); }
+.contact-info p { color: rgba(244,241,232,.8); }
+.contact-list { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 18px; }
+.contact-list li { display: flex; gap: 14px; align-items: flex-start; }
+.contact-list .ci-icon {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(143,209,111,.16); display: grid; place-items: center;
+}
+.contact-list .ci-icon svg { width: 22px; height: 22px; fill: var(--ns-olive-bright); }
+.contact-list strong { display: block; color: var(--ns-cream); font-family: var(--ns-font-head); letter-spacing: 1px; }
+.contact-list a, .contact-list span { color: rgba(244,241,232,.82); }
+
+.quote-form {
+  background: var(--ns-cream);
+  border-radius: var(--ns-radius);
+  padding: 38px;
+  box-shadow: var(--ns-shadow);
+}
+.quote-form h3 { font-size: 1.5rem; margin-bottom: 6px; }
+.quote-form .form-sub { color: var(--ns-muted); margin-bottom: 22px; font-size: .98rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  color: var(--ns-text);
+  margin-bottom: 6px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cdcabd;
+  border-radius: 8px;
+  font-family: var(--ns-font-body);
+  font-size: 16px;
+  background: #fff;
+  color: var(--ns-text);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--ns-olive-mid);
+  box-shadow: 0 0 0 3px rgba(79,154,64,.15);
+}
+.field textarea { min-height: 120px; resize: vertical; }
+.hp-field { position: absolute; left: -9999px; }
+.form-note { font-size: 13px; color: var(--ns-muted); margin: 14px 0 0; }
+.form-alert {
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: .96rem;
+}
+.form-alert--ok { background: rgba(79,154,64,.14); color: #3c4a1c; border: 1px solid rgba(79,154,64,.4); }
+.form-alert--err { background: rgba(170,60,40,.12); color: #8a2c1c; border: 1px solid rgba(170,60,40,.35); }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  background: #0a0b09;
+  color: rgba(244,241,232,.7);
+  padding: 64px 0 28px;
+  font-size: .96rem;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(116,184,94,.18);
+}
+.footer-brand img,
+.footer-brand svg { height: 64px; margin-bottom: 16px; }
+.footer-brand p { max-width: 360px; }
+.footer-col h4 {
+  color: var(--ns-cream);
+  font-size: 1.05rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { color: rgba(244,241,232,.7); }
+.footer-col a:hover { color: var(--ns-olive-bright); }
+.footer-social { display: flex; gap: 12px; margin-top: 18px; }
+.footer-social a {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(244,241,232,.08);
+}
+.footer-social svg { width: 18px; height: 18px; fill: var(--ns-cream); }
+.footer-social a:hover { background: var(--ns-olive); }
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 24px;
+  font-size: .88rem;
+  color: rgba(244,241,232,.5);
+}
+
+/* ============================================================
+   Generic page (About / Services / etc. block content)
+   ============================================================ */
+.page-hero {
+  background: var(--ns-black);
+  color: var(--ns-cream);
+  padding: 150px 0 70px;
+  text-align: center;
+}
+.page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); color: #fff; }
+.page-body { padding: 70px 0; }
+.page-body .container { max-width: 820px; }
+.page-body h2 { margin-top: 1.4em; }
+.page-body img { border-radius: var(--ns-radius); margin: 1.5em 0; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 980px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; gap: 34px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================================================
+   Inner pages: service detail, values, gallery, lightbox, map
+   ============================================================ */
+.text-link {
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: var(--ns-olive);
+}
+.about-extra { margin-top: 1.2em; }
+
+/* Service detail list */
+.service-list { display: grid; gap: 22px; max-width: 920px; margin: 0 auto; }
+.service-detail {
+  display: flex;
+  gap: 24px;
+  background: var(--ns-cream);
+  border: 1px solid var(--ns-line);
+  border-radius: var(--ns-radius);
+  padding: 30px 32px;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.service-detail:hover { box-shadow: var(--ns-shadow); border-color: var(--ns-olive-light); }
+.service-detail-icon {
+  flex: 0 0 auto;
+  width: 64px; height: 64px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  background: rgba(79,154,64,.12);
+}
+.service-detail-icon svg { width: 34px; height: 34px; fill: var(--ns-olive); }
+.service-detail-body h2 { font-size: 1.5rem; margin-bottom: 8px; }
+.service-detail-body p { color: var(--ns-muted); margin-bottom: 12px; }
+
+/* Values grid */
+.values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.value-card {
+  background: var(--ns-cream);
+  border: 1px solid var(--ns-line);
+  border-radius: var(--ns-radius);
+  padding: 32px 26px;
+  text-align: center;
+}
+.value-card .service-icon { margin: 0 auto 18px; }
+.value-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.value-card p { color: var(--ns-muted); margin: 0; font-size: .98rem; }
+
+/* Gallery */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.gallery-item { margin: 0; }
+.gallery-link {
+  position: relative;
+  display: block;
+  border-radius: var(--ns-radius);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+.gallery-link img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.gallery-link:hover img { transform: scale(1.06); }
+.gallery-link figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 28px 18px 14px;
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(14,16,13,.85));
+}
+.gallery-note { text-align: center; margin-top: 32px; color: var(--ns-muted); }
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(8,9,7,.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.lightbox.is-open { display: flex; }
+.lightbox-inner { margin: 0; max-width: 90vw; max-height: 88vh; text-align: center; }
+.lightbox-inner img { max-width: 100%; max-height: 80vh; border-radius: 10px; }
+.lightbox-inner figcaption {
+  color: var(--ns-cream);
+  font-family: var(--ns-font-head);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 22px; right: 28px;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Map / service-area band */
+.map-band {
+  background:
+    linear-gradient(rgba(14,16,13,.72), rgba(14,16,13,.72)),
+    radial-gradient(circle at 30% 40%, rgba(79,154,64,.5), transparent 60%),
+    var(--ns-dark);
+  padding: 70px 0;
+  text-align: center;
+}
+.map-overlay svg { width: 40px; height: 40px; fill: var(--ns-olive-bright); margin: 0 auto 10px; }
+.map-overlay p { color: var(--ns-cream); font-family: var(--ns-font-head); letter-spacing: 1px; text-transform: uppercase; margin: 0 0 6px; font-size: 1.2rem; }
+.map-overlay small { color: rgba(244,241,232,.55); }
+
+/* Testimonials */
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.testimonial {
+  margin: 0;
+  background: var(--ns-cream);
+  border: 1px solid var(--ns-line);
+  border-radius: var(--ns-radius);
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.testimonial .stars { color: var(--ns-olive-mid); letter-spacing: 3px; font-size: 1.05rem; margin-bottom: 14px; }
+.testimonial blockquote {
+  margin: 0 0 20px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ns-text);
+  font-style: italic;
+}
+.testimonial blockquote::before { content: "\201C"; }
+.testimonial blockquote::after { content: "\201D"; }
+.testimonial figcaption { margin-top: auto; }
+.testimonial figcaption strong {
+  display: block;
+  font-family: var(--ns-font-head);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ns-text);
+}
+.testimonial figcaption span { font-size: .9rem; color: var(--ns-muted); }
+
+/* Service areas */
+.areas-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+.areas-copy h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+.areas-grid {
+  list-style: none;
+  margin: 26px 0 30px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.area-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--ns-parchment);
+  border: 1px solid var(--ns-line);
+  border-radius: 8px;
+  font-family: var(--ns-font-head);
+  letter-spacing: .5px;
+  font-size: .98rem;
+}
+.area-chip svg { width: 18px; height: 18px; fill: var(--ns-olive); flex: 0 0 auto; }
+.map-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--ns-radius);
+  overflow: hidden;
+  box-shadow: var(--ns-shadow);
+}
+.map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-tip { font-size: 13px; color: var(--ns-muted); margin-top: 12px; }
+
+@media (max-width: 980px) {
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .areas-layout { grid-template-columns: 1fr; gap: 34px; }
+}
+
+@media (max-width: 760px) {
+  .header-cta .btn { display: none; }
+  .header-phone { display: none; }
+  .nav-toggle { display: block; }
+  .service-detail { flex-direction: column; gap: 16px; }
+  .values-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .areas-grid { grid-template-columns: 1fr; }
+  .primary-nav {
+    position: fixed;
+    inset: 70px 0 auto 0;
+    background: rgba(14,16,13,.99);
+    border-bottom: 1px solid rgba(116,184,94,.25);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+  }
+  .primary-nav.is-open { max-height: 70vh; }
+  .primary-nav ul { flex-direction: column; align-items: stretch; gap: 0; padding: 10px 0; }
+  .primary-nav li { border-bottom: 1px solid rgba(116,184,94,.12); }
+  .primary-nav a { display: block; padding: 16px 24px; }
+  .section { padding: 64px 0; }
+  .services-grid,
+  .why-grid,
+  .steps-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+</style></head>
+<body class="home">
+
+<header class="site-header" id="site-header">
+	<div class="header-inner">
+		<div class="brand">
+			<a class="brand-mark-link" href="#top"><img class="brand-mark" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwIDEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik5vcnRoIFN0YXIgVHJlZSBDYXJlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibnNMb2dvU3RhciIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjY2ZkMmM2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI1NyIgZmlsbD0iIzBlMTAwZCIgc3Ryb2tlPSIjNGY5YTQwIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI0OSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmY2ZTJhIiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC43Ii8+CiAgPCEtLSBkaWFnb25hbCBjb21wYXNzIHJheXMgLS0+CiAgPHBhdGggZD0iTTkwIDM4IEw2MCA1OCBMMzAgMzggTDUwIDYwIEwzMCA4MiBMNjAgNzAgTDkwIDgyIEw3MCA2MCBaIgogICAgICAgIGZpbGw9IiM0ZjlhNDAiIG9wYWNpdHk9IjAuODUiLz4KICA8IS0tIHByaW1hcnkgbm9ydGgtc3RhciAtLT4KICA8cGF0aCBkPSJNNjAgMTQgTDY4IDU2IEwxMTAgNjAgTDY4IDY0IEw2MCAxMDYgTDUyIDY0IEwxMCA2MCBMNTIgNTYgWiIKICAgICAgICBmaWxsPSJ1cmwoI25zTG9nb1N0YXIpIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMy41IiBmaWxsPSIjMmY2ZTJhIi8+Cjwvc3ZnPgo=" alt="North Star Landscaping"></a>							<div class="brand-text">
+					<strong>North Star Landscaping</strong>
+					<span>Design • Build • Maintain</span>
+				</div>
+					</div>
+
+		<nav class="primary-nav" id="primary-nav" aria-label="Primary">
+			<ul><li><a href="#top">Home</a></li><li><a href="#services">Services</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#service-areas">Areas</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>		</nav>
+
+		<div class="header-cta">
+			<a class="header-phone" href="tel:+19893184491">(989) 318-4491</a>
+			<a class="btn btn--primary" href="#contact">Free Quote</a>
+			<button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
+				<span></span><span></span><span></span>
+			</button>
+		</div>
+	</div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+	<div class="container hero-inner">
+		<img class="hero-star" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik5vcnRoIFN0YXIgY29tcGFzcyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im5zU3Rhck1haW4iIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2NmZDJjNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBkaWFnb25hbCBjb21wYXNzIHJheXMgLS0+CiAgPHBhdGggZD0iTTE1MCA1MCBMMTAwIDg0IEw1MCA1MCBMODQgMTAwIEw1MCAxNTAgTDEwMCAxMTYgTDE1MCAxNTAgTDExNiAxMDAgWiIKICAgICAgICBmaWxsPSIjNGY5YTQwIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPCEtLSBwcmltYXJ5IG5vcnRoLXN0YXIgLS0+CiAgPHBhdGggZD0iTTEwMCA2IEwxMTMgODcgTDE5NCAxMDAgTDExMyAxMTMgTDEwMCAxOTQgTDg3IDExMyBMNiAxMDAgTDg3IDg3IFoiCiAgICAgICAgZmlsbD0idXJsKCNuc1N0YXJNYWluKSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNiIgZmlsbD0iIzJmNmUyYSIvPgo8L3N2Zz4K" alt="North Star compass">
+		<p class="hero-tagline">Where Quality Takes Root.</p>
+		<h1>Beautiful Landscapes<span class="accent">Year-Round.</span></h1>
+		<p class="hero-lead">Professional landscape design, lawn care, hardscaping, and seasonal maintenance for residential and commercial properties.</p>
+		<div class="hero-actions">
+			<a class="btn btn--primary btn--lg" href="#contact">Get a Free Quote</a>
+			<a class="btn btn--ghost btn--lg" href="tel:+19893184491">
+				<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.4a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .6 3.6 1 1 0 0 1-.25 1l-2.15 2.2z"/></svg> Call (989) 318-4491			</a>
+		</div>
+		<div class="hero-trust">
+			<span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.2 8 11 4.6-1.8 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg> Licensed &amp; Insured</span>
+			<span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v3h6V5H5zm8 0v3h6V5h-6zM5 10v9h6v-9H5zm8 0v9h6v-9h-6z"/></svg> Free Estimates</span>
+			<span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m12 2 2.6 1.8 3.1-.3 1 3 2.5 1.9-1.2 2.9 1.2 2.9-2.5 1.9-1 3-3.1-.3L12 22l-2.6-1.8-3.1.3-1-3L2.8 15.6 4 12.7l-1.2-2.9 2.5-1.9 1-3 3.1.3L12 2zm-1.2 12.8 5-5-1.4-1.4-3.6 3.6-1.6-1.6-1.4 1.4 3 3z"/></svg> Quality Guaranteed</span>
+		</div>
+	</div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="section" id="about">
+	<div class="container about-grid">
+		<div class="about-copy">
+			<span class="eyebrow">Who We Are</span>
+			<h2>Landscaping Done Beautifully, Done Right.</h2>
+			<p class="lead">North Star Landscaping is a full-service landscaping company dedicated to designing, building, and maintaining healthy, beautiful outdoor spaces for residential and commercial properties.</p>
+			<p>We specialize in landscape design, lawn care, sod and seeding, mulch and garden beds, hardscaping, irrigation, and seasonal cleanups. Our experienced crews combine quality craftsmanship with reliable service to enhance your property's curb appeal and value.</p>
+			<p>Whether you want a brand-new landscape design, a lush, well-kept lawn, a new paver patio, or year-round maintenance, we deliver dependable results with a commitment to quality workmanship and customer satisfaction.</p>
+			<a class="btn btn--primary" href="#services">Explore Our Services</a>
+		</div>
+		<div class="about-stats">
+			<div class="stat"><strong>100%</strong><span>Licensed &amp; Insured</span></div>
+			<div class="stat"><strong>Free</strong><span>On-Site Estimates</span></div>
+			<div class="stat"><strong>9+</strong><span>Landscaping Services</span></div>
+			<div class="stat"><strong>5★</strong><span>Rated Local Service</span></div>
+		</div>
+	</div>
+</section>
+
+<!-- ============================ SERVICES ============================ -->
+<section class="section section--tint" id="services">
+	<div class="container">
+		<div class="section-head">
+			<span class="eyebrow">What We Do</span>
+			<h2>Our Landscaping Services</h2>
+			<p>From a fresh lawn to a full backyard transformation, we have the crew and equipment to bring your vision to life.</p>
+		</div>
+		<div class="services-grid">
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v3h6V5H5zm8 0v3h6V5h-6zM5 10v9h6v-9H5zm8 0v9h6v-9h-6z"/></svg></div>
+					<h3>Landscape Design</h3>
+					<p>Custom landscape designs tailored to your property, style, and budget.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11 2h3.6L13 11h6a1 1 0 0 1 1 1v3h-1.1a3 3 0 0 1-5.8 0H9.9a3 3 0 0 1-5.8 0H3a1 1 0 0 1-1-1 3 3 0 0 1 3-3h6l1.6-7H11V2zM6 14a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm10 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg></div>
+					<h3>Lawn Care &amp; Maintenance</h3>
+					<p>Mowing, fertilization, and weed control for a lush, healthy lawn.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 22c-.3-4 .4-7 2-9-.2 1.2-.1 2.3.3 3.4.6-1.5 1.6-2.7 3-3.4-1.5 2-2.2 4.9-2.1 9H12zM9.8 22H7c0-4.3-.7-7-2.1-9 1.4.7 2.4 1.9 3 3.4.4-1.1.5-2.2.3-3.4 1.6 2 2.3 5 1.6 9z"/></svg></div>
+					<h3>Sod &amp; Seeding</h3>
+					<p>Fresh sod and over-seeding for an instant, even, green lawn.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 21c0-7 4-13 14-13 0 9-5 14-12 14 0 0 0-4 4-7-3 1-5 3-6 6z"/></svg></div>
+					<h3>Mulch &amp; Garden Beds</h3>
+					<p>Mulching, planting, and bed design that frame your home beautifully.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11 22v-7h2v7h-2zm1-8c-3 0-5-2-5-5 3 0 5 2 5 5zm0-2c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg></div>
+					<h3>Tree &amp; Shrub Planting</h3>
+					<p>Selecting and planting the right trees and shrubs for your space.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 4h18v4H3V4zm0 6h8v4H3v-4zm10 0h8v4h-8v-4zM3 16h18v4H3v-4z"/></svg></div>
+					<h3>Hardscaping &amp; Patios</h3>
+					<p>Paver patios, walkways, and retaining walls built to last.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2s7 7.6 7 12a7 7 0 1 1-14 0c0-4.4 7-12 7-12zm0 16a4 4 0 0 0 4-4h-2a2 2 0 0 1-2 2v2z"/></svg></div>
+					<h3>Irrigation Systems</h3>
+					<p>Efficient sprinkler systems that keep your landscape green.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 21c3-1 5-3 6-6l3 3c-2 3-5 4-9 5v-2zm9.5-7L19 7.5 16.5 5 10 11.5 12.5 14zM18 4l2 2 1.5-1.5a1.4 1.4 0 0 0-2-2L18 4z"/></svg></div>
+					<h3>Seasonal Cleanups</h3>
+					<p>Spring and fall cleanups, leaf removal, and bed refreshes.</p>
+				</article>
+							<article class="service-card">
+					<div class="service-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11 1h2v22h-2z"/><path d="M1 11h22v2H1z"/><path d="M3.2 4.6 4.6 3.2 20.8 19.4l-1.4 1.4z"/><path d="M19.4 3.2l1.4 1.4L4.6 20.8l-1.4-1.4z"/></svg></div>
+					<h3>Snow &amp; Ice Management</h3>
+					<p>Reliable winter snow and ice removal for homes &amp; businesses.</p>
+				</article>
+					</div>
+	</div>
+</section>
+
+<!-- ============================ WHY US ============================ -->
+<section class="section section--dark" id="why">
+	<div class="container">
+		<div class="section-head">
+			<span class="eyebrow">Why North Star</span>
+			<h2>Quality You Can See.</h2>
+			<p>Property owners choose us for professional service, dependable scheduling, and beautiful, long-lasting results.</p>
+		</div>
+		<div class="why-grid">
+							<div class="feature">
+					<div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m12 2 2.6 1.8 3.1-.3 1 3 2.5 1.9-1.2 2.9 1.2 2.9-2.5 1.9-1 3-3.1-.3L12 22l-2.6-1.8-3.1.3-1-3L2.8 15.6 4 12.7l-1.2-2.9 2.5-1.9 1-3 3.1.3L12 2zm-1.2 12.8 5-5-1.4-1.4-3.6 3.6-1.6-1.6-1.4 1.4 3 3z"/></svg></div>
+					<div>
+						<h3>Quality Craftsmanship</h3>
+						<p>Meticulous work and premium materials on every project, big or small.</p>
+					</div>
+				</div>
+							<div class="feature">
+					<div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.2 8 11 4.6-1.8 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg></div>
+					<div>
+						<h3>Licensed &amp; Insured</h3>
+						<p>Fully insured crews for complete peace of mind on your property.</p>
+					</div>
+				</div>
+							<div class="feature">
+					<div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v3h6V5H5zm8 0v3h6V5h-6zM5 10v9h6v-9H5zm8 0v9h6v-9h-6z"/></svg></div>
+					<div>
+						<h3>Free Design Consults</h3>
+						<p>No-pressure consultations and clear, written estimates up front.</p>
+					</div>
+				</div>
+							<div class="feature">
+					<div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.7-4-2.3V7z"/></svg></div>
+					<div>
+						<h3>Reliable &amp; On Time</h3>
+						<p>We show up, communicate clearly, and finish when we say we will.</p>
+					</div>
+				</div>
+							<div class="feature">
+					<div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11 22v-7h2v7h-2zm1-8c-3 0-5-2-5-5 3 0 5 2 5 5zm0-2c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg></div>
+					<div>
+						<h3>Healthy Plants</h3>
+						<p>Hardy, locally-suited plants and turf chosen to thrive for years.</p>
+					</div>
+				</div>
+							<div class="feature">
+					<div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 21c0-7 4-13 14-13 0 9-5 14-12 14 0 0 0-4 4-7-3 1-5 3-6 6z"/></svg></div>
+					<div>
+						<h3>Eco-Friendly Care</h3>
+						<p>Smart watering, organic options, and sustainable practices.</p>
+					</div>
+				</div>
+					</div>
+	</div>
+</section>
+
+<!-- ============================ MISSION ============================ -->
+<section class="section mission">
+	<div class="container">
+		<img class="star-divider" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik5vcnRoIFN0YXIgY29tcGFzcyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im5zU3Rhck1haW4iIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2NmZDJjNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBkaWFnb25hbCBjb21wYXNzIHJheXMgLS0+CiAgPHBhdGggZD0iTTE1MCA1MCBMMTAwIDg0IEw1MCA1MCBMODQgMTAwIEw1MCAxNTAgTDEwMCAxMTYgTDE1MCAxNTAgTDExNiAxMDAgWiIKICAgICAgICBmaWxsPSIjNGY5YTQwIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPCEtLSBwcmltYXJ5IG5vcnRoLXN0YXIgLS0+CiAgPHBhdGggZD0iTTEwMCA2IEwxMTMgODcgTDE5NCAxMDAgTDExMyAxMTMgTDEwMCAxOTQgTDg3IDExMyBMNiAxMDAgTDg3IDg3IFoiCiAgICAgICAgZmlsbD0idXJsKCNuc1N0YXJNYWluKSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNiIgZmlsbD0iIzJmNmUyYSIvPgo8L3N2Zz4K" alt="">
+		<span class="eyebrow">Our Mission</span>
+		<blockquote>"Creating beautiful, healthy outdoor spaces that bring lasting value and enjoyment to every property and community we serve — one yard at a time."</blockquote>
+		<cite>Where Quality Takes Root.</cite>
+	</div>
+</section>
+
+<!-- ============================ PROCESS ============================ -->
+<section class="section" id="process">
+	<div class="container">
+		<div class="section-head">
+			<span class="eyebrow">How It Works</span>
+			<h2>Simple, Transparent Process</h2>
+			<p>No surprises — just clear communication from the first call to final cleanup.</p>
+		</div>
+		<div class="steps-grid">
+			<div class="step"><h3>Free Estimate</h3><p>Call or request a quote online. We assess the job and provide a clear, written estimate.</p></div>
+			<div class="step"><h3>Plan &amp; Schedule</h3><p>We agree on scope, timing, and safety plan that fits your property and your calendar.</p></div>
+			<div class="step"><h3>Expert Execution</h3><p>Our insured crew completes the work safely using professional equipment and techniques.</p></div>
+			<div class="step"><h3>Full Cleanup</h3><p>We haul away debris and leave your property clean, safe, and looking its best.</p></div>
+		</div>
+	</div>
+</section>
+
+<!-- ============================ TESTIMONIALS ============================ -->
+<section class="section section--tint" id="testimonials">
+	<div class="container">
+		<div class="section-head">
+			<span class="eyebrow">Reviews</span>
+			<h2>What Our Customers Say</h2>
+			<p>We've earned a reputation for professional, reliable landscaping and beautiful results.</p>
+		</div>
+		<div class="testimonials-grid">
+							<figure class="testimonial">
+					<div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+					<blockquote>North Star completely transformed our backyard — new patio, beds, and a lush lawn. It looks like a magazine cover now. Worth every penny.</blockquote>
+					<figcaption>
+						<strong>Sarah M.</strong>
+						<span>Homeowner</span>
+					</figcaption>
+				</figure>
+							<figure class="testimonial">
+					<div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+					<blockquote>Their weekly lawn care is fantastic. The grass has never looked greener and the crew is always professional and on time.</blockquote>
+					<figcaption>
+						<strong>David R.</strong>
+						<span>Residential Client</span>
+					</figcaption>
+				</figure>
+							<figure class="testimonial">
+					<div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+					<blockquote>We use North Star for landscaping and snow removal across our properties. Reliable, insured, and the results always impress our tenants.</blockquote>
+					<figcaption>
+						<strong>Property Management Co.</strong>
+						<span>Commercial Client</span>
+					</figcaption>
+				</figure>
+					</div>
+	</div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="section section--dark" id="contact">
+	<div class="container contact-grid">
+		<div class="contact-info">
+			<span class="eyebrow">Get In Touch</span>
+			<h2>Request Your Free Quote</h2>
+			<p>Ready to upgrade your lawn or outdoor space? Reach out today — we respond fast and the estimate is always free.</p>
+			<ul class="contact-list">
+				<li>
+					<span class="ci-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.4a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .6 3.6 1 1 0 0 1-.25 1l-2.15 2.2z"/></svg></span>
+					<div><strong>Call Us</strong><a href="tel:+19893184491">(989) 318-4491</a></div>
+				</li>
+				<li>
+					<span class="ci-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 4h20v16H2V4zm10 7L4 6v1l8 5 8-5V6l-8 5z"/></svg></span>
+					<div><strong>Email</strong><a href="mailto:Support@north-star-pros.com">Support@north-star-pros.com</a></div>
+				</li>
+				<li>
+					<span class="ci-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg></span>
+					<div><strong>Service Area</strong><span>Serving residential &amp; commercial properties</span></div>
+				</li>
+				<li>
+					<span class="ci-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.7-4-2.3V7z"/></svg></span>
+					<div><strong>Hours</strong><span>Mon–Sat 7am–6pm · Free Estimates</span></div>
+				</li>
+			</ul>
+		</div>
+
+		<form class="quote-form" action="#" method="post">
+	<h3>Tell Us About Your Project</h3>
+	<p class="form-sub">We'll get back to you with a free, no-pressure estimate.</p>
+
+	
+	<input type="hidden" name="action" value="ns_quote">
+	<input type="hidden" name="ns_quote_nonce" value="preview">	<!-- Honeypot: hidden from humans -->
+	<div class="hp-field" aria-hidden="true">
+		<label>Company Website</label>
+		<input type="text" name="company_website" tabindex="-1" autocomplete="off">
+	</div>
+
+	<div class="form-row">
+		<div class="field">
+			<label for="qf-name">Name *</label>
+			<input id="qf-name" type="text" name="name" required>
+		</div>
+		<div class="field">
+			<label for="qf-phone">Phone</label>
+			<input id="qf-phone" type="tel" name="phone">
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="field">
+			<label for="qf-email">Email</label>
+			<input id="qf-email" type="email" name="email">
+		</div>
+		<div class="field">
+			<label for="qf-service">Service Needed</label>
+			<select id="qf-service" name="service">
+				<option value="">Select a service…</option>
+									<option value="Landscape Design">Landscape Design</option>
+									<option value="Lawn Care &amp; Maintenance">Lawn Care &amp; Maintenance</option>
+									<option value="Sod &amp; Seeding">Sod &amp; Seeding</option>
+									<option value="Mulch &amp; Garden Beds">Mulch &amp; Garden Beds</option>
+									<option value="Tree &amp; Shrub Planting">Tree &amp; Shrub Planting</option>
+									<option value="Hardscaping &amp; Patios">Hardscaping &amp; Patios</option>
+									<option value="Irrigation Systems">Irrigation Systems</option>
+									<option value="Seasonal Cleanups">Seasonal Cleanups</option>
+									<option value="Snow &amp; Ice Management">Snow &amp; Ice Management</option>
+								<option value="Other">Other / Not sure</option>
+			</select>
+		</div>
+	</div>
+	<div class="field">
+		<label for="qf-message">Project Details</label>
+		<textarea id="qf-message" name="message" placeholder="Tell us about your project — lawn size, services needed, timing, etc."></textarea>
+	</div>
+	<button type="submit" class="btn btn--primary btn--lg" style="width:100%; justify-content:center;">Send My Request</button>
+	<p class="form-note">* Please provide your name and at least a phone or email so we can reach you.</p>
+</form>
+	</div>
+</section>
+
+<footer class="site-footer">
+	<div class="container">
+		<div class="footer-top">
+			<div class="footer-brand">
+				<a class="brand-mark-link" href="#top"><img class="brand-mark" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwIDEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik5vcnRoIFN0YXIgVHJlZSBDYXJlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibnNMb2dvU3RhciIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjY2ZkMmM2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI1NyIgZmlsbD0iIzBlMTAwZCIgc3Ryb2tlPSIjNGY5YTQwIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI0OSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmY2ZTJhIiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC43Ii8+CiAgPCEtLSBkaWFnb25hbCBjb21wYXNzIHJheXMgLS0+CiAgPHBhdGggZD0iTTkwIDM4IEw2MCA1OCBMMzAgMzggTDUwIDYwIEwzMCA4MiBMNjAgNzAgTDkwIDgyIEw3MCA2MCBaIgogICAgICAgIGZpbGw9IiM0ZjlhNDAiIG9wYWNpdHk9IjAuODUiLz4KICA8IS0tIHByaW1hcnkgbm9ydGgtc3RhciAtLT4KICA8cGF0aCBkPSJNNjAgMTQgTDY4IDU2IEwxMTAgNjAgTDY4IDY0IEw2MCAxMDYgTDUyIDY0IEwxMCA2MCBMNTIgNTYgWiIKICAgICAgICBmaWxsPSJ1cmwoI25zTG9nb1N0YXIpIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMy41IiBmaWxsPSIjMmY2ZTJhIi8+Cjwvc3ZnPgo=" alt="North Star Landscaping"></a>				<p>Professional landscape design, lawn care, hardscaping, planting and seasonal maintenance. Keeping residential and commercial properties healthy, green and beautiful year-round.</p>
+							</div>
+
+			<div class="footer-col">
+				<h4>Explore</h4>
+				<ul>
+					<li><a href="#top">Home</a></li>
+					<li><a href="#topservices/">Services</a></li>
+					<li><a href="#topgallery/">Gallery</a></li>
+					<li><a href="#topservice-areas/">Service Areas</a></li>
+					<li><a href="#topabout/">About Us</a></li>
+					<li><a href="#topcontact/">Contact</a></li>
+				</ul>
+			</div>
+
+			<div class="footer-col">
+				<h4>Contact</h4>
+				<ul>
+					<li><a href="tel:+19893184491">(989) 318-4491</a></li>
+					<li><a href="mailto:Support@north-star-pros.com">Support@north-star-pros.com</a></li>
+					<li>Serving residential &amp; commercial properties</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<span>&copy; 2026 North Star Landscaping. All rights reserved.</span>
+			<span>Where Quality Takes Root.</span>
+		</div>
+	</div>
+</footer>
+
+<script>
+/* North Star Landscaping — front-end interactions */
+(function () {
+  "use strict";
+
+  var header = document.getElementById("site-header");
+  var toggle = document.getElementById("nav-toggle");
+  var nav = document.getElementById("primary-nav");
+
+  // Solid header background once the user scrolls past the hero top.
+  function onScroll() {
+    if (!header) return;
+    if (window.scrollY > 40) {
+      header.classList.add("is-solid");
+    } else {
+      header.classList.remove("is-solid");
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle.
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    // Close the menu after a link is tapped.
+    nav.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // Gallery lightbox.
+  var lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    var lbImg = document.getElementById("lightbox-img");
+    var lbCap = document.getElementById("lightbox-cap");
+    var closeBtn = lightbox.querySelector(".lightbox-close");
+
+    function openLightbox(src, caption) {
+      lbImg.setAttribute("src", src);
+      lbImg.setAttribute("alt", caption || "");
+      lbCap.textContent = caption || "";
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+    }
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll(".gallery-link").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        openLightbox(link.getAttribute("href"), link.getAttribute("data-caption"));
+      });
+    });
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+  }
+
+  // If the form was submitted, scroll to the result message.
+  if (window.location.hash === "#contact" && window.location.search.indexOf("quote=") !== -1) {
+    var contact = document.getElementById("contact");
+    if (contact) {
+      window.requestAnimationFrame(function () {
+        contact.scrollIntoView();
+      });
+    }
+  }
+})();
+
+</script></body>
+</html>

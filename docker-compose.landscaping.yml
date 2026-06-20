@@ -1,0 +1,93 @@
+# North Star Landscaping — local WordPress stack
+#
+#   Start it:   docker compose -f docker-compose.landscaping.yml up -d
+#   View site:  http://localhost:8090
+#   WP admin:   http://localhost:8090/wp-admin   (user: admin / pass: admin123)
+#   Email inbox: http://localhost:8035           (Mailpit)
+#   Database:   http://localhost:8091            (phpMyAdmin)
+#
+# Uses its own ports, volumes, and project name so it can run at the same time
+# as the Tree Care site (docker-compose.yml) without clashing.
+
+name: northstar-landscaping
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: nsls-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - db_data_ls:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.5-php8.2-apache
+    container_name: nsls-wp
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8090:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+      NS_SMTP_HOST: mailpit
+      NS_SMTP_PORT: 1025
+    volumes:
+      - wp_data_ls:/var/www/html
+      - ./theme/northstar-landscaping:/var/www/html/wp-content/themes/northstar-landscaping
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins
+
+  wp-setup:
+    image: wordpress:cli-php8.2
+    container_name: nsls-setup
+    depends_on:
+      - db
+      - wordpress
+    environment:
+      SITE_URL: http://localhost:8090
+      MAIL_URL: http://localhost:8035
+      SITE_TITLE: North Star Landscaping
+      THEME_SLUG: northstar-landscaping
+      SITE_TAGLINE: Where Quality Takes Root.
+      WP_ADMIN_USER: admin
+      WP_ADMIN_PASSWORD: admin123
+      WP_ADMIN_EMAIL: Support@north-star-pros.com
+    volumes:
+      - wp_data_ls:/var/www/html
+      - ./theme/northstar-landscaping:/var/www/html/wp-content/themes/northstar-landscaping
+      - ./setup:/setup:ro
+    entrypoint: ["sh", "/setup/wp-setup.sh"]
+    restart: "no"
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: nsls-pma
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8091:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress
+      UPLOAD_LIMIT: 64M
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: nsls-mailpit
+    restart: unless-stopped
+    ports:
+      - "8035:8025"   # web inbox -> http://localhost:8035
+
+volumes:
+  db_data_ls:
+  wp_data_ls:
