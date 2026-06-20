@@ -43,6 +43,7 @@ $phone_link = northstar_opt( 'phone_link', '+15551234567' );
 				echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></li>';
 				echo '<li><a href="' . esc_url( home_url( '/services/' ) ) . '">Services</a></li>';
 				echo '<li><a href="' . esc_url( home_url( '/gallery/' ) ) . '">Gallery</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/service-areas/' ) ) . '">Areas</a></li>';
 				echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">About</a></li>';
 				echo '<li><a href="' . esc_url( home_url( '/contact/' ) ) . '">Contact</a></li>';
 				echo '</ul>';

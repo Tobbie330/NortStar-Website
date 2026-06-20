@@ -179,6 +179,54 @@ function northstar_features() {
 }
 
 /* -------------------------------------------------------------------------
+ * Customer testimonials shown on the home page.
+ * Edit the text here to use your real reviews.
+ * ---------------------------------------------------------------------- */
+function northstar_testimonials() {
+	return array(
+		array(
+			'quote' => 'They removed two huge oaks next to our house quickly and safely, then cleaned up like they were never here. Professional from the quote to the last branch.',
+			'name'  => 'Sarah M.',
+			'role'  => 'Homeowner',
+		),
+		array(
+			'quote' => 'A storm dropped a tree across our driveway overnight. North Star showed up first thing and had us cleared by noon. Lifesavers.',
+			'name'  => 'David R.',
+			'role'  => 'Residential Client',
+		),
+		array(
+			'quote' => 'We use them for ongoing grounds maintenance at our properties. Reliable, insured, and the crews always do clean, quality work.',
+			'name'  => 'Property Management Co.',
+			'role'  => 'Commercial Client',
+		),
+	);
+}
+
+/* -------------------------------------------------------------------------
+ * Service areas (towns/regions you cover). Editable as a comma-separated
+ * list under Appearance > Customize > North Star Settings, with a sensible
+ * placeholder list as the default.
+ * ---------------------------------------------------------------------- */
+function northstar_service_areas() {
+	$raw = northstar_opt( 'areas', '' );
+	if ( '' !== trim( (string) $raw ) ) {
+		return array_values( array_filter( array_map( 'trim', explode( ',', $raw ) ) ) );
+	}
+	return array(
+		'Downtown & Metro', 'North Side', 'South Side', 'East Suburbs',
+		'West Suburbs', 'Surrounding Rural Areas', 'Lake Communities', 'Nearby Counties',
+	);
+}
+
+/* -------------------------------------------------------------------------
+ * Build a keyless Google Maps embed URL from the configured location.
+ * ---------------------------------------------------------------------- */
+function northstar_map_embed_src() {
+	$q = northstar_opt( 'map_query', 'United States' );
+	return 'https://maps.google.com/maps?q=' . rawurlencode( $q ) . '&z=10&ie=UTF8&iwloc=&output=embed';
+}
+
+/* -------------------------------------------------------------------------
  * Inline SVG icon set (so the theme has zero external image dependencies)
  * ---------------------------------------------------------------------- */
 function northstar_icon( $name ) {

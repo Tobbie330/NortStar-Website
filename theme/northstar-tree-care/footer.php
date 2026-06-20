@@ -30,6 +30,7 @@ $home       = home_url( '/' );
 					<li><a href="<?php echo esc_url( $home ); ?>">Home</a></li>
 					<li><a href="<?php echo esc_url( $home . 'services/' ); ?>">Services</a></li>
 					<li><a href="<?php echo esc_url( $home . 'gallery/' ); ?>">Gallery</a></li>
+					<li><a href="<?php echo esc_url( $home . 'service-areas/' ); ?>">Service Areas</a></li>
 					<li><a href="<?php echo esc_url( $home . 'about/' ); ?>">About Us</a></li>
 					<li><a href="<?php echo esc_url( $home . 'contact/' ); ?>">Contact</a></li>
 				</ul>

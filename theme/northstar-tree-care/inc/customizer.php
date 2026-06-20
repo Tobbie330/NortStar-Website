@@ -23,6 +23,8 @@ function northstar_customize_register( $wp_customize ) {
 		'email'        => array( 'label' => 'Email address',           'default' => 'info@northstartreecare.com',              'type' => 'text' ),
 		'address'      => array( 'label' => 'Service area / address',  'default' => 'Serving residential, commercial & municipal properties', 'type' => 'text' ),
 		'hours'        => array( 'label' => 'Hours / availability',    'default' => 'Mon–Sat 7am–6pm · 24/7 Storm Emergencies', 'type' => 'text' ),
+		'map_query'    => array( 'label' => 'Map location (town, state or address)', 'default' => 'United States', 'type' => 'text' ),
+		'areas'        => array( 'label' => 'Service areas (comma-separated towns)',  'default' => '',              'type' => 'text' ),
 		'hero_tagline' => array( 'label' => 'Hero tagline',            'default' => 'Rooted in Quality. Guided by the North Star.', 'type' => 'text' ),
 		'hero_lead'    => array( 'label' => 'Hero intro text',         'default' => 'Professional tree removal, trimming, stump grinding and emergency storm care for residential, commercial, and rural properties.', 'type' => 'textarea' ),
 		'facebook'     => array( 'label' => 'Facebook URL',            'default' => '',                                        'type' => 'url' ),

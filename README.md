@@ -15,9 +15,11 @@ WordPress dashboard.
 - A custom WordPress theme (`North Star Tree Care`) styled to match your logo
   (black, olive-green, silver) — no page builder or coding required to use it.
 - A full multi-page website with a real navigation menu:
-  - **Home** — hero, about, 9 services, "why choose us", mission, process, quote form
+  - **Home** — hero, about, 9 services, "why choose us", mission, process,
+    **customer testimonials**, and a quote form
   - **Services** — every service explained in detail
   - **Gallery** — a photo grid with click-to-zoom lightbox
+  - **Service Areas** — the towns you cover + an embedded **Google Map**
   - **About** — story, mission & values
   - **Contact** — contact details + working quote form + service-area band
 - A working **"Request a Quote"** form that **saves every submission** to the
@@ -33,11 +35,16 @@ WordPress dashboard.
 
 ## Quick visual preview (no Docker needed)
 
-Want to see the design right now without installing anything? Open
-[`preview/index.html`](preview/index.html) in your web browser (double-click it).
-This is a static snapshot of the **whole site** — you can click through Home,
-Services, Gallery, About, and Contact. _It's read-only_ (forms and admin don't
-work here); for the editable, fully-working site, use Docker below.
+Two ways to look without installing anything:
+
+- **One portable file:** [`preview/standalone-homepage.html`](preview/standalone-homepage.html)
+  has everything (styles + images) embedded — double-click it anywhere, even on a
+  computer without the rest of the project.
+- **The whole site:** open [`preview/index.html`](preview/index.html) to click
+  through Home, Services, Gallery, Service Areas, About, and Contact.
+
+These previews are _read-only_ (forms and admin don't work here); for the
+editable, fully-working site, use Docker below.
 
 ## 1. Prerequisites
 
@@ -102,6 +109,10 @@ Log in at **http://localhost:8080/wp-admin** (`admin` / `admin123`), then:
   The designed sections live in the theme, but each page also has an editable
   area in the block editor for extra text.
 - **Edit the navigation menu:** `Appearance → Menus` (a "Main Menu" is set up for you).
+- **Edit customer testimonials:** in `functions.php` → `northstar_testimonials()`.
+- **Set your map + service areas:** `Appearance → Customize → North Star Settings`
+  → *Map location* (e.g. `Springfield, IL`) and *Service areas* (a comma-separated
+  list of towns). The Service Areas page updates automatically.
 - **Change the site title/tagline:** `Settings → General`.
 
 ### Add your gallery photos
@@ -145,6 +156,7 @@ theme/northstar-tree-care/
 ├── front-page.php         # The home page
 ├── page-services.php      # Services page
 ├── page-gallery.php       # Gallery page (with lightbox)
+├── page-service-areas.php # Service Areas page (with Google Map embed)
 ├── page-about.php         # About page
 ├── page-contact.php       # Contact page
 ├── page.php               # Fallback for any other page

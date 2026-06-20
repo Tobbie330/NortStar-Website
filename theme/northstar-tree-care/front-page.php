@@ -127,6 +127,29 @@ $star_svg     = get_template_directory_uri() . '/assets/img/star.svg';
 	</div>
 </section>
 
+<!-- ============================ TESTIMONIALS ============================ -->
+<section class="section section--tint" id="testimonials">
+	<div class="container">
+		<div class="section-head">
+			<span class="eyebrow">Reviews</span>
+			<h2>What Our Customers Say</h2>
+			<p>We've earned a reputation for prompt, professional, and safe tree care.</p>
+		</div>
+		<div class="testimonials-grid">
+			<?php foreach ( northstar_testimonials() as $t ) : ?>
+				<figure class="testimonial">
+					<div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+					<blockquote><?php echo esc_html( $t['quote'] ); ?></blockquote>
+					<figcaption>
+						<strong><?php echo esc_html( $t['name'] ); ?></strong>
+						<span><?php echo esc_html( $t['role'] ); ?></span>
+					</figcaption>
+				</figure>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
 <!-- ============================ CONTACT ============================ -->
 <section class="section section--dark" id="contact">
 	<div class="container contact-grid">

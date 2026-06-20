@@ -52,10 +52,11 @@ ensure_page() {
   echo "$_id"
 }
 
-echo "→ Creating pages (Home, Services, Gallery, About, Contact)..."
+echo "→ Creating pages (Home, Services, Gallery, Service Areas, About, Contact)..."
 HOME_ID=$(ensure_page "home" "Home")
 SERVICES_ID=$(ensure_page "services" "Services")
 GALLERY_ID=$(ensure_page "gallery" "Gallery")
+AREAS_ID=$(ensure_page "service-areas" "Service Areas")
 ABOUT_ID=$(ensure_page "about" "About")
 CONTACT_ID=$(ensure_page "contact" "Contact")
 
@@ -73,6 +74,7 @@ if [ "$ITEMS" = "0" ]; then
   wp menu item add-post main-menu "$HOME_ID"     --title="Home"     >/dev/null 2>&1 || true
   wp menu item add-post main-menu "$SERVICES_ID" --title="Services" >/dev/null 2>&1 || true
   wp menu item add-post main-menu "$GALLERY_ID"  --title="Gallery"  >/dev/null 2>&1 || true
+  wp menu item add-post main-menu "$AREAS_ID"    --title="Areas"    >/dev/null 2>&1 || true
   wp menu item add-post main-menu "$ABOUT_ID"    --title="About"    >/dev/null 2>&1 || true
   wp menu item add-post main-menu "$CONTACT_ID"  --title="Contact"  >/dev/null 2>&1 || true
 fi
