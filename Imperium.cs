@@ -7451,8 +7451,10 @@ namespace Oxide.Plugins
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
+    using Oxide.Core;
     using Oxide.Game.Rust.Cui;
 
     public partial class Imperium
@@ -7542,6 +7544,11 @@ namespace Oxide.Plugins
 
                 if (image.Id != null)
                     return new CuiRawImageComponent { Png = image.Id, Sprite = UI.TransparentTexture };
+                else if (image.IsGenerated)
+                    // A locally-sourced image (file://) with no stored data - e.g. the admin
+                    // hasn't supplied it. Return null so the caller falls back to a plain
+                    // panel instead of sending an unreachable file:// URL to the client.
+                    return null;
                 else
                     return new CuiRawImageComponent { Url = image.Url, Sprite = UI.TransparentTexture };
             }
@@ -7554,10 +7561,37 @@ namespace Oxide.Plugins
             public void Init()
             {
                 UserPanel.InitializeUserPanelCommandDefs();
-                RegisterImage(dataDirectory + "map-image.png");
-                RegisterImage(dataDirectory + "server-logo.png");
+                RegisterFileImage("map-image.png");
+                RegisterFileImage("server-logo.png");
                 RegisterDefaultImages(typeof(UI.HudIcon));
                 RegisterDefaultImages(typeof(UI.MapIcon));
+            }
+
+            // Registers an image that is loaded from a file in oxide/data/ImperiumImages.
+            // These files are optional (the admin supplies them), so we only attempt to
+            // load them when they actually exist - otherwise the file:// fetch 404s and
+            // spams the console. A missing file falls back to a plain background in the UI.
+            private void RegisterFileImage(string fileName)
+            {
+                string filePath = Path.Combine(Interface.Oxide.DataDirectory, "ImperiumImages", fileName);
+
+                string url = dataDirectory + fileName;
+
+                if (File.Exists(filePath))
+                {
+                    RegisterImage(url);
+                }
+                else
+                {
+                    // Register the URL without downloading so UI lookups still resolve
+                    // (the file:// fetch would 404). The UI falls back to a plain panel.
+                    if (!Images.ContainsKey(url))
+                        Images[url] = new Image(url);
+
+                    Instance.Puts(
+                        $"Optional image '{fileName}' not found at {filePath} - skipping download. " +
+                        $"Place the file in oxide/data/ImperiumImages/ to enable it.");
+                }
             }
 
             public void Destroy()
@@ -7679,10 +7713,12 @@ namespace Oxide.Plugins
                     if (!string.IsNullOrEmpty(www.error))
                     {
                         Instance.Puts($"Error while downloading image {image.Url}: {www.error}");
+                        DownloadNext();
                     }
                     else if (www.downloadedBytes == 0)
                     {
                         Instance.Puts($"Error while downloading image {image.Url}: No data received");
+                        DownloadNext();
                     }
                     else
                     {
