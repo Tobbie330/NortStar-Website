@@ -1,0 +1,52 @@
+# Home Hub configuration — copy to config.yaml and edit.
+# Secrets (passwords, API keys) go in .env, not here.
+
+hub:
+  name: Dinning Family Home
+  refresh_seconds: 30        # how often device state is re-polled
+
+integrations:
+
+  # Sample devices so the dashboard works before anything is connected.
+  # Turn this off once your real integrations are running.
+  demo:
+    enabled: true
+
+  # Wyze cameras, bulbs, plugs. Credentials in .env (WYZE_*).
+  # Live camera video additionally needs the wyze-bridge container:
+  #   docker compose --profile wyze up -d
+  wyze:
+    enabled: false
+
+  # Roku
+  #  - devices: Roku TVs / streaming players on your LAN (full remote control
+  #    via Roku's documented ECP protocol, port 8060).
+  #  - cameras: Roku Smart Home cameras. Roku publishes NO camera API, so a
+  #    stream URL from a source you control is required — see README.
+  roku:
+    enabled: false
+    devices: []
+    #  - name: Living Room TV
+    #    host: 192.168.1.40
+    cameras: []
+    #  - name: Driveway Cam
+    #    hls_url: http://192.168.1.50:1984/api/stream.m3u8?src=driveway
+    #    snapshot_url: http://192.168.1.50:1984/api/frame.jpeg?src=driveway
+
+  # La Crosse View weather stations. Credentials in .env (LACROSSE_*).
+  lacrosse:
+    enabled: false
+
+  # Hubspace lights / plugs / fans. Credentials in .env (HUBSPACE_*).
+  hubspace:
+    enabled: false
+
+  # Any other camera that exposes a browser-playable URL.
+  cameras:
+    enabled: false
+    cameras: []
+    #  - name: Back Porch
+    #    hls_url: http://192.168.1.50:1984/api/stream.m3u8?src=porch
+    #    snapshot_url: http://192.168.1.50:1984/api/frame.jpeg?src=porch
+    #  - name: Garage
+    #    mjpeg_url: http://192.168.1.61/mjpeg

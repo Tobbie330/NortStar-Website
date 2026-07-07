@@ -1,0 +1,53 @@
+# Home Hub — household management dashboard
+#
+# Runs alongside the North Star WordPress sites without clashing:
+# the WordPress stacks use ports 8080/8081/8025/1025 and 8090/8091/8035,
+# Home Hub uses 8100 (dashboard) and — only with the wyze profile —
+# 8101/8554/8888/8889 for camera streaming.
+#
+#   cd home-hub
+#   cp .env.example .env          # then fill in credentials
+#   cp config.example.yaml config.yaml
+#   docker compose up -d                         # hub only
+#   docker compose --profile wyze up -d          # hub + live Wyze video
+#
+# Dashboard: http://<server>:8100
+
+name: home-hub
+
+services:
+  homehub:
+    build: .
+    container_name: homehub
+    restart: unless-stopped
+    ports:
+      - "8100:8100"
+    env_file: .env
+    volumes:
+      - ./config.yaml:/srv/homehub/config.yaml:ro
+      - homehub_data:/data
+
+  # Optional: turns the Wyze cameras on your account into HLS/WebRTC/RTSP
+  # streams the dashboard can play. https://github.com/mrlt8/docker-wyze-bridge
+  wyze-bridge:
+    image: mrlt8/wyze-bridge:latest
+    container_name: wyze-bridge
+    restart: unless-stopped
+    profiles: ["wyze"]
+    ports:
+      - "8101:5000"   # bridge web UI + snapshots
+      - "8554:8554"   # RTSP
+      - "8888:8888"   # HLS
+      - "8889:8889"   # WebRTC
+      - "8189:8189/udp"  # WebRTC ICE
+    environment:
+      WYZE_EMAIL: ${WYZE_EMAIL}
+      WYZE_PASSWORD: ${WYZE_PASSWORD}
+      API_ID: ${WYZE_KEY_ID}
+      API_KEY: ${WYZE_API_KEY}
+      WB_AUTH: "false"          # bridge is only reachable on your LAN; set true + WB_PASSWORD to lock it down
+      # Set this to your server's LAN IP so WebRTC works from other devices:
+      # WB_IP: 192.168.1.50
+
+volumes:
+  homehub_data:

@@ -10,9 +10,17 @@ WordPress dashboard.
 
 ---
 
-## 📦 Two websites in this repo
+## 📦 What's in this repo
 
-This project now contains **two** sibling WordPress sites:
+Besides the two WordPress sites below, this repo now also contains
+**[🏠 Home Hub](home-hub/)** — a self-hosted household management dashboard
+(Wyze & Roku cameras, La Crosse View weather, Hubspace lighting, and more)
+that runs alongside the websites on port **8100**. See
+[`home-hub/README.md`](home-hub/README.md) for setup.
+
+## 🌐 Two websites in this repo
+
+This project contains **two** sibling WordPress sites:
 
 | Site | Theme folder | Run locally | Local URL | Upload zip |
 | ---- | ------------ | ----------- | --------- | ---------- |

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Hub</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<link rel="stylesheet" href="/static/styles.css">
+<!-- hls.js enables live HLS camera streams (Wyze bridge, go2rtc, NVRs).
+     If the CDN is unreachable the dashboard falls back to snapshots. -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+</head>
+<body>
+
+<div id="login-screen" class="login-screen hidden">
+  <form id="login-form" class="login-card">
+    <div class="login-logo">🏠</div>
+    <h1>Home Hub</h1>
+    <p class="muted">Enter the household password</p>
+    <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" autofocus>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+    <p id="login-error" class="login-error hidden">Wrong password — try again.</p>
+  </form>
+</div>
+
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">🏠</span><span id="hub-name">Home Hub</span></div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="overview" class="tab active">Overview</button>
+      <button data-tab="cameras" class="tab">Cameras</button>
+      <button data-tab="lighting" class="tab">Lighting</button>
+      <button data-tab="weather" class="tab">Weather</button>
+      <button data-tab="devices" class="tab">Devices</button>
+      <button data-tab="integrations" class="tab">Integrations</button>
+    </nav>
+    <div class="topbar-actions">
+      <button id="refresh-btn" class="btn btn-ghost" title="Refresh all integrations">⟳</button>
+      <button id="logout-btn" class="btn btn-ghost hidden" title="Sign out">Sign out</button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section id="tab-overview" class="tab-panel"></section>
+    <section id="tab-cameras" class="tab-panel hidden"></section>
+    <section id="tab-lighting" class="tab-panel hidden"></section>
+    <section id="tab-weather" class="tab-panel hidden"></section>
+    <section id="tab-devices" class="tab-panel hidden"></section>
+    <section id="tab-integrations" class="tab-panel hidden"></section>
+  </main>
+
+  <footer class="footer">
+    <span id="status-line" class="muted">Loading…</span>
+  </footer>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
